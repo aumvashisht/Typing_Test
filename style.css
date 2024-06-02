@@ -52,6 +52,9 @@ textarea{
     padding: 1em 0.5em;
     font-size: 15px;
 }
+textarea:hover{
+    cursor:text;
+}
 button{
     margin-top: 20px;
     background-color: #44b267;
@@ -60,6 +63,9 @@ button{
     padding: 10px 30px;
     border-radius: 5px;
     font-size: 18px;
+}
+button:hover{
+    cursor: pointer;
 }
 .result{
     margin-top: 40px;
