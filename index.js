@@ -1,6 +1,4 @@
-
-
-const textApiURL = "https://api.quotable.io/random?minLength=200&maxLength=350";
+const textApiURL = "https://baconipsum.com/api/?type=filler&paras=1&format=text";
 const textSection = document.getElementById("quote");
 const userInput = document.getElementById("quote-input");
 let quote = "";
@@ -10,15 +8,19 @@ let mistakes = 0;
 let startTime;
 
 const generateText = async () => {
-    const response = await fetch(textApiURL);
+    try {
+        const response = await fetch(textApiURL);
+        const data = await response.text();
+        quote = data;
 
-    let data = await response.json();
-    quote = data.content;
-
-    let arr = quote.split("").map((value) => {
-        return "<span class='quote-chars'>" + value + "</span>";
-    });
-    textSection.innerHTML = arr.join(""); // Use = instead of += to avoid appending multiple times
+        let arr = quote.split("").map((value) => {
+            return "<span class='quote-chars'>" + value + "</span>";
+        });
+        textSection.innerHTML = arr.join("");
+    } catch (error) {
+        console.error("Error fetching the quote:", error);
+        textSection.innerHTML = "Error fetching the quote. Please try again later.";
+    }
 };
 
 userInput.addEventListener("input", () => {
